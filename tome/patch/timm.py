@@ -43,7 +43,7 @@ class ToMeBlock(Block):
         if r > 0:
             # Apply ToMe here
             # --- 控制参与相似度计算的比例 p ---
-            p = 0.25  # 例如：只让 25% 的 token 参与 scores 计算，你可以随便调
+            p = self._tome_info.get("p", 1.0)  # 只让 p 的 token 参与 scores 计算
 
             B, N, _ = metric.shape
             r_remove = r
@@ -113,6 +113,7 @@ def make_tome_class(transformer_class):
 
         def forward(self, *args, **kwdargs) -> torch.Tensor:
             self._tome_info["r"] = parse_r(len(self.blocks), self.r)
+            self._tome_info["p"] = self.p
             self._tome_info["size"] = None
             self._tome_info["source"] = None
 
@@ -137,8 +138,10 @@ def apply_patch(
 
     model.__class__ = ToMeVisionTransformer
     model.r = 0
+    model.p = 1.0
     model._tome_info = {
         "r": model.r,
+        "p": model.p,
         "size": None,
         "source": None,
         "trace_source": trace_source,
