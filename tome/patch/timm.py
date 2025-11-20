@@ -16,7 +16,6 @@ from timm.models.vision_transformer import Attention, Block, VisionTransformer
 
 from tome.merge import bipartite_soft_matching, merge_source, merge_wavg
 from tome.utils import parse_r
-from tome.merge import random_bipartite_soft_matching
 
 
 
@@ -46,19 +45,54 @@ class ToMeBlock(Block):
             p = self._tome_info.get("p", 1.0)  # 只让 p 的 token 参与 scores 计算
 
             B, N, _ = metric.shape
-            r_remove = r
-            r_active = max(int(p * N), r_remove)
+            # 选择参与相似度计算的 token 子集大小
+            num_selected = max(int(p * N), r)  # 至少要能 merge 掉 r 个
+            num_selected = min(num_selected, N)
 
-            merge, _ = random_bipartite_soft_matching(
-                metric,
-                r_active
+            # 选出子集索引 idx_sel，和剩余部分 idx_rest
+            idx_all = torch.arange(N, device=x.device)
+            # 随机打乱后取前 num_selected 个作为子集
+            perm = torch.randperm(N, device=x.device)
+            idx_sel = perm[:num_selected]
+            idx_sel, _ = torch.sort(idx_sel)
+
+            mask = torch.ones(N, dtype=torch.bool, device=x.device)
+            mask[idx_sel] = False
+            idx_rest = idx_all[mask]  # 没参与相似度计算的 token
+
+            # 只对子集上的 metric 做 bipartite matching
+            metric_sel = metric[:, idx_sel]  # (B, num_selected, D)
+            r_sub = min(r, num_selected)
+
+            merge_local, _ = bipartite_soft_matching(
+                metric_sel,
+                r_sub,
+                class_token=False,
+                distill_token=False,
             )
 
+            # 定义一个“全局”的 merge 函数：只对子集做 merge，其它 token 保留
+            def merge_global(x_in: torch.Tensor, mode="mean") -> torch.Tensor:
+                # x_in: (B, N, C)
+                x_sel = x_in[:, idx_sel, :]  # 参与 ToMe 的那部分
+                x_rest = x_in[:, idx_rest, :]  # 不参与相似度计算的那部分
+
+                y_sel = merge_local(x_sel, mode=mode)  # (B, num_selected - r_sub, C)
+
+                # 最终长度: len(idx_rest) + len(y_sel) = N - r_sub
+                # 顺序这里我们设为 [rest, merged_sel]
+                return torch.cat([x_rest, y_sel], dim=1)
+
+            # trace_source 时，用同一个 merge_global 作用在 source 上
             if self._tome_info["trace_source"]:
                 self._tome_info["source"] = merge_source(
-                    merge, x, self._tome_info["source"]
+                    merge_global, x, self._tome_info["source"]
                 )
-            x, self._tome_info["size"] = merge_wavg(merge, x, self._tome_info["size"])
+
+            # 对 x 和 size 做加权平均 merge
+            x, self._tome_info["size"] = merge_wavg(
+                merge_global, x, self._tome_info["size"]
+            )
 
         x = x + self._drop_path2(self.mlp(self.norm2(x)))
         return x

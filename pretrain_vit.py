@@ -139,7 +139,7 @@ def main():
 
     print("DEBUG Train size:", len(train_set_small), "Test size:", len(test_set_small))
 
-    r_list = [0, 4, 8, 12, 16, 24, 32]
+    r_list = [4, 8, 12, 16, 24, 32]
     p_list = [1.0, 0.5, 0.25]
 
     results = {}
