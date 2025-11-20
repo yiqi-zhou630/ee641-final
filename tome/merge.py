@@ -167,6 +167,7 @@ def random_bipartite_soft_matching(
 
     with torch.no_grad():
         B, N, _ = metric.shape
+        r = min(r, N - 1)
         rand_idx = torch.rand(B, N, 1, device=metric.device).argsort(dim=1)
 
         a_idx = rand_idx[:, :r, :]
