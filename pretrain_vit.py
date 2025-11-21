@@ -7,6 +7,8 @@ from torchvision import datasets, transforms
 import timm
 import tome
 import time
+from matplotlib import pyplot as plt
+
 
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD  = [0.229, 0.224, 0.225]
@@ -97,6 +99,66 @@ def train_one_rp(r, p, train_loader, test_loader, device):
 
     return train_time, acc
 
+def visualize_results(r_list, p_list, results):
+    time_matrix = []
+    acc_matrix = []
+    for r in r_list:
+        row_t = []
+        row_a = []
+        for p in p_list:
+            t, acc = results[(r, p)]
+            row_t.append(t)
+            row_a.append(acc)
+        time_matrix.append(row_t)
+        acc_matrix.append(row_a)
+
+    # ---------- 1. 训练时间热力图 ----------
+    plt.figure(figsize=(6, 4))
+    plt.imshow(time_matrix, aspect='auto')
+    plt.colorbar(label="Train Time (s)")
+    plt.xticks(range(len(p_list)), [str(p) for p in p_list])
+    plt.yticks(range(len(r_list)), [str(r) for r in r_list])
+    plt.xlabel("p")
+    plt.ylabel("r")
+    plt.title("train time")
+    plt.savefig("train_time_heatmap.png")
+    plt.show()
+
+    # ---------- 2. 准确率热力图 ----------
+    plt.figure(figsize=(6, 4))
+    plt.imshow(acc_matrix, aspect='auto')
+    plt.colorbar(label="Test Accuracy")
+    plt.xticks(range(len(p_list)), [str(p) for p in p_list])
+    plt.yticks(range(len(r_list)), [str(r) for r in r_list])
+    plt.xlabel("p")
+    plt.ylabel("r")
+    plt.title("Accuracy")
+    plt.savefig("accuracy_heatmap.png")
+    plt.show()
+
+    plt.figure(figsize=(6, 4))
+    for p in p_list:
+        times = [results[(r, p)][0] for r in r_list]
+        plt.plot(r_list, times, marker='o', label=f"p={p}")
+    plt.xlabel("r")
+    plt.ylabel("Train Time")
+    plt.title("train time - p")
+    plt.legend()
+    plt.savefig("train_time_vs_r.png")
+    plt.show()
+
+    plt.figure(figsize=(6, 4))
+    for p in p_list:
+        accs = [results[(r, p)][1] for r in r_list]
+        plt.plot(r_list, accs, marker='o', label=f"p={p}")
+    plt.xlabel("r")
+    plt.ylabel("Test Accuracy")
+    plt.title("test accuracy - r")
+    plt.legend()
+    plt.savefig("accuracy_vs_r.png")
+    plt.show()
+
+
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("device:", device)
@@ -149,7 +211,7 @@ def main():
             t, acc = train_one_rp(r, p, train_loader, test_loader, device)
             results[(r, p)] = (t, acc)
 
-
+    visualize_results(r_list, p_list, results)
 
 if __name__ == "__main__":
     main()
