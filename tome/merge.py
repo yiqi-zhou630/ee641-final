@@ -68,8 +68,9 @@ def bipartite_soft_matching(
             unm_idx = unm_idx.sort(dim=1)[0]
 
     def merge(x: torch.Tensor, mode="mean") -> torch.Tensor:
-        src, dst = x[..., ::2, :], x[..., 1::2, :]
+        src, dst = x[..., ::2, :], x[..., 1::2, :]  # Split into two sets 奇src 偶dst
         n, t1, c = src.shape
+        
         unm = src.gather(dim=-2, index=unm_idx.expand(n, t1 - r, c))
         src = src.gather(dim=-2, index=src_idx.expand(n, r, c))
         dst = dst.scatter_reduce(-2, dst_idx.expand(n, r, c), src, reduce=mode)
@@ -214,12 +215,14 @@ def merge_wavg(
     """
     Applies the merge function by taking a weighted average based on token size.
     Returns the merged tensor and the new token sizes.
+    即给token做加权平均的merge
     """
     if size is None:
-        size = torch.ones_like(x[..., 0, None])
+        size = torch.ones_like(x[..., 0, None]) # default size=1
 
-    x = merge(x * size, mode="sum")
-    size = merge(size, mode="sum")
+    x_weighted = x * size   # multiply size as weights
+    x = merge(x_weighted, mode="sum")   # sum the weighted tokens
+    size = merge(size, mode="sum")   # sum the sizes
 
     x = x / size
     return x, size

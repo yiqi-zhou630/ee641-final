@@ -45,9 +45,10 @@ class ToMeBlock(Block):
             p = self._tome_info.get("p", 1.0)  # 只让 p 的 token 参与 scores 计算
 
             B, N, _ = metric.shape
+
             # 选择参与相似度计算的 token 子集大小
-            num_selected = max(int(p * N), r)  # 至少要能 merge 掉 r 个
-            num_selected = min(num_selected, N)
+            num_selected = max(int(p * N), r)  # 至少要能 merge 掉 r 个，所以参与计算的不能少于 r
+            num_selected = min(num_selected, N) # 不能超过总数
 
             # 选出子集索引 idx_sel，和剩余部分 idx_rest
             idx_all = torch.arange(N, device=x.device)
@@ -73,15 +74,16 @@ class ToMeBlock(Block):
 
             # 定义一个“全局”的 merge 函数：只对子集做 merge，其它 token 保留
             def merge_global(x_in: torch.Tensor, mode="mean") -> torch.Tensor:
-                # x_in: (B, N, C)
+                # x_in: (B, N, C) all tokens
                 x_sel = x_in[:, idx_sel, :]  # 参与 ToMe 的那部分
                 x_rest = x_in[:, idx_rest, :]  # 不参与相似度计算的那部分
 
+                # doing ToMe on the selected subset
                 y_sel = merge_local(x_sel, mode=mode)  # (B, num_selected - r_sub, C)
 
                 # 最终长度: len(idx_rest) + len(y_sel) = N - r_sub
                 # 顺序这里我们设为 [rest, merged_sel]
-                return torch.cat([x_rest, y_sel], dim=1)
+                return torch.cat([x_rest, y_sel], dim=1)    # (B, N - r_sub, C)
 
             # trace_source 时，用同一个 merge_global 作用在 source 上
             if self._tome_info["trace_source"]:

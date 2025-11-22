@@ -1,0 +1,9 @@
+torch>=1.12.1
+torchvision
+timm==0.4.12
+fvcore
+iopath
+matplotlib
+numpy
+pillow
+scipy
