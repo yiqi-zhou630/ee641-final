@@ -18,10 +18,14 @@ def load_results(json_path):
     return data
 
 
-def visualize_results(data, output_dir="results"):
+def visualize_results(data, json_path):
     """
     Generate visualizations based on JSON data
+    将图表保存到与 JSON 文件相同的文件夹中
     """
+    # 获取 JSON 文件所在的目录作为输出目录
+    output_dir = os.path.dirname(json_path)
+    
     timestamp = data["timestamp"]
     r_list = data["r_list"]
     p_list = data["p_list"]
@@ -51,7 +55,7 @@ def visualize_results(data, output_dir="results"):
         time_matrix.append(row_t)
         acc_matrix.append(row_a)
 
-    os.makedirs(output_dir, exist_ok=True)
+    # output_dir 已经在函数开头从 json_path 获取，无需再创建
 
     # ---------- 1. 训练时间热力图 ----------
     plt.figure(figsize=(8, 6))
@@ -70,9 +74,9 @@ def visualize_results(data, output_dir="results"):
                     ha="center", va="center", color="black", fontsize=9)
     
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/train_time_heatmap_{timestamp}.png", dpi=150)
+    plt.savefig(f"{output_dir}/train_time_heatmap.png", dpi=150)
     plt.close()
-    print(f"  Saved: train_time_heatmap_{timestamp}.png")
+    print(f"✓ Saved: train_time_heatmap.png")
 
     # ---------- 2. 准确率热力图 ----------
     plt.figure(figsize=(8, 6))
@@ -91,9 +95,9 @@ def visualize_results(data, output_dir="results"):
                     ha="center", va="center", color="black", fontsize=9)
     
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/accuracy_heatmap_{timestamp}.png", dpi=150)
+    plt.savefig(f"{output_dir}/accuracy_heatmap.png", dpi=150)
     plt.close()
-    print(f"  Saved: accuracy_heatmap_{timestamp}.png")
+    print(f"✓ Saved: accuracy_heatmap.png")
 
     # ---------- 3. 训练时间 vs r (不同 p) ----------
     plt.figure(figsize=(10, 6))
@@ -106,9 +110,9 @@ def visualize_results(data, output_dir="results"):
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/train_time_vs_r_{timestamp}.png", dpi=150)
+    plt.savefig(f"{output_dir}/train_time_vs_r.png", dpi=150)
     plt.close()
-    print(f"  Saved: train_time_vs_r_{timestamp}.png")
+    print(f"✓ Saved: train_time_vs_r.png")
 
     # ---------- 4. 准确率 vs r (不同 p) ----------
     plt.figure(figsize=(10, 6))
@@ -121,24 +125,81 @@ def visualize_results(data, output_dir="results"):
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/accuracy_vs_r_{timestamp}.png", dpi=150)
+    plt.savefig(f"{output_dir}/accuracy_vs_r.png", dpi=150)
     plt.close()
-    print(f"  Saved: accuracy_vs_r_{timestamp}.png")
+    print(f"✓ Saved: accuracy_vs_r.png")
+    
+    # ---------- 5. 训练曲线（如果有 history 数据）----------
+    has_history = any('history' in value for value in results_dict.values())
+    if has_history:
+        print("\n Generating training curves...")
+        
+        # 为每个 (r, p) 配置绘制训练曲线
+        for key, value in results_dict.items():
+            if 'history' not in value or not value['history']:
+                continue
+                
+            history = value['history']
+            epochs = history['epochs']
+            
+            # 创建 2x1 子图
+            fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
+            
+            # 子图1: Loss 曲线
+            ax1.plot(epochs, history['train_loss'], 'b-', linewidth=2, label='Train Loss')
+            ax1.set_xlabel('Epoch')
+            ax1.set_ylabel('Loss')
+            ax1.set_title(f'Training Loss - {key}')
+            ax1.legend()
+            ax1.grid(True, alpha=0.3)
+            
+            # 子图2: Accuracy 曲线
+            ax2.plot(epochs, history['train_acc'], 'g-', linewidth=2, label='Train Acc')
+            ax2.plot(epochs, history['test_acc'], 'r-', linewidth=2, label='Test Acc')
+            ax2.set_xlabel('Epoch')
+            ax2.set_ylabel('Accuracy')
+            ax2.set_title(f'Training & Test Accuracy - {key}')
+            ax2.legend()
+            ax2.grid(True, alpha=0.3)
+            
+            plt.tight_layout()
+            plt.savefig(f"{output_dir}/training_curve_{key}.png", dpi=150)
+            plt.close()
+        
+        print(f"✓ Saved training curves for all configurations")
 
-    print(f"\n  All plots saved to {output_dir}/ folder")
+    print(f"\n✓ All plots saved to {output_dir}/ folder")
 
 
 def print_summary(data):
     """
     打印实验结果摘要
     """
-    print("\n" + "="*60)
+    print("\n" + "="*80)
     print("EXPERIMENT SUMMARY")
-    print("="*60)
+    print("="*80)
     print(f"Timestamp: {data['timestamp']}")
+    
+    # 打印实验配置信息（如果有）
+    if 'experiment_config' in data:
+        config = data['experiment_config']
+        print("\n--- Experiment Configuration ---")
+        print(f"Model:        {config.get('model', 'N/A')}")
+        print(f"Dataset:      {config.get('dataset', 'N/A')}")
+        print(f"Train Size:   {config.get('train_size', 'N/A')}")
+        print(f"Test Size:    {config.get('test_size', 'N/A')}")
+        print(f"Batch Size:   {config.get('batch_size', 'N/A')}")
+        print(f"Epochs:       {config.get('epochs', 'N/A')}")
+        print(f"Learning Rate: {config.get('learning_rate', 'N/A')}")
+        print(f"Optimizer:    {config.get('optimizer', 'N/A')}")
+        print(f"Device:       {config.get('device', 'N/A')}")
+        print(f"Image Size:   {config.get('image_size', 'N/A')}")
+    
+    print(f"\n--- ToMe Parameters ---")
     print(f"r values tested: {data['r_list']}")
     print(f"p values tested: {data['p_list']}")
-    print("\nResults:")
+    
+    print("\n--- Results ---")
     print("-"*80)
     print(f"{'Config':<15} {'Train Time (s)':<18} {'Accuracy':<12} {'FLOPs (G)':<12}")
     print("-"*80)
@@ -154,16 +215,20 @@ def print_summary(data):
 def main():
     if len(sys.argv) < 2:
         print("Usage: python evaluate.py <path_to_json_file>")
-        print("Example: python evaluate.py results/experiment_20250121_143052.json")
+        print("Example: python evaluate.py results/experiment_20251122_120000/results.json")
         
-        # 尝试找最新的 JSON 文件
+        # 尝试找最新的实验文件夹
         if os.path.exists("results"):
-            json_files = [f for f in os.listdir("results") if f.endswith('.json')]
-            if json_files:
-                latest_json = max([os.path.join("results", f) for f in json_files], 
-                                key=os.path.getmtime)
-                print(f"\nFound latest result: {latest_json}")
-                print(f"   Run: python evaluate.py {latest_json}")
+            # 查找所有实验文件夹
+            exp_dirs = [d for d in os.listdir("results") 
+                       if os.path.isdir(os.path.join("results", d)) and d.startswith("experiment_")]
+            if exp_dirs:
+                latest_dir = max([os.path.join("results", d) for d in exp_dirs], 
+                               key=os.path.getmtime)
+                latest_json = os.path.join(latest_dir, "results.json")
+                if os.path.exists(latest_json):
+                    print(f"\nFound latest result: {latest_json}")
+                    print(f"   Run: python evaluate.py {latest_json}")
         sys.exit(1)
     
     json_path = sys.argv[1]
@@ -176,10 +241,11 @@ def main():
     print_summary(data)
     
     # 生成可视化
-    print("Generating visualizations...")
-    visualize_results(data)
+    print("\nGenerating visualizations...")
+    visualize_results(data, json_path)
     
-    print("\nEvaluation complete!")
+    print("\n✓ Evaluation complete!")
+    print(f"  All files saved to: {os.path.dirname(json_path)}/")
 
 
 if __name__ == "__main__":

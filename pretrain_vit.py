@@ -125,6 +125,14 @@ def train_one_rp(r, p, train_loader, test_loader, device, epochs=30, log_interva
     # 4. 训练
     start_time = time.time()
     
+    # 记录每个 epoch 的指标历史
+    history = {
+        "train_loss": [],
+        "train_acc": [],
+        "test_acc": [],
+        "epochs": []
+    }
+    
     for epoch in range(epochs):
         model.train()
         running_loss = 0.0
@@ -150,13 +158,20 @@ def train_one_rp(r, p, train_loader, test_loader, device, epochs=30, log_interva
         # 更新学习率
         scheduler.step()
         
+        # 计算每个 epoch 的指标
+        avg_loss = running_loss / len(train_loader)
+        train_acc = correct / total
+        test_acc = evaluate(model, test_loader, device)
+        
+        # 记录到历史
+        history["epochs"].append(epoch + 1)
+        history["train_loss"].append(float(avg_loss))
+        history["train_acc"].append(float(train_acc))
+        history["test_acc"].append(float(test_acc))
+        
         # 每隔 log_interval 个 epoch 输出状态
         if (epoch + 1) % log_interval == 0 or epoch == 0 or epoch == epochs - 1:
-            avg_loss = running_loss / len(train_loader)
-            train_acc = correct / total
             elapsed_time = time.time() - start_time
-            
-            test_acc = evaluate(model, test_loader, device)
             
             print(f"Epoch [{epoch+1:3d}/{epochs}] | "
                   f"Loss: {avg_loss:.4f} | "
@@ -175,37 +190,45 @@ def train_one_rp(r, p, train_loader, test_loader, device, epochs=30, log_interva
           f"Accuracy: {final_acc:.4f} | " 
           f"FLOPs: {flops_giga:.4f} GFLOPs")
 
-    return train_time, final_acc, flops_giga
+    return train_time, final_acc, flops_giga, history
 
 
-def save_results_to_json(r_list, p_list, results):
+def save_results_to_json(r_list, p_list, results, config):
     """
-    保存实验结果到 JSON 文件
-    results: {(r, p): (train_time, accuracy, flops)}
+    保存实验结果到 JSON 文件，并创建独立的实验文件夹
+    results: {(r, p): (train_time, accuracy, flops, history)}
+    config: 包含实验配置信息的字典
     """
-    os.makedirs("results", exist_ok=True)
-    
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # 创建实验专属文件夹
+    experiment_dir = f"results/experiment_{timestamp}"
+    os.makedirs(experiment_dir, exist_ok=True)
+    
     results_data = {
         "timestamp": timestamp,
+        "experiment_config": config,  # 添加实验配置信息
         "r_list": r_list,
         "p_list": p_list,
         "results": {}
     }
     
-    for (r, p), (t, acc, flops) in results.items():
+    for (r, p), (t, acc, flops, history) in results.items():
         results_data["results"][f"r{r}_p{p}"] = {
             "train_time": t,
             "accuracy": acc,
-            "flops_gflops": flops
+            "flops_gflops": flops,
+            "history": history
         }
     
-    json_path = f"results/experiment_{timestamp}.json"
+    # 保存 JSON 到实验文件夹
+    json_path = f"{experiment_dir}/results.json"
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(results_data, f, indent=4, ensure_ascii=False)
     
-    print(f"\nResults saved to: {json_path}")
-    return json_path
+    print(f"\n✓ Results saved to: {experiment_dir}/")
+    print(f"  - JSON file: {json_path}")
+    return json_path, experiment_dir
 
 
 
@@ -233,16 +256,17 @@ def main():
     train_data = Subset(train_set, train_indices)
     test_data = Subset(test_set, test_indices)
 
+    batch_size = 128
     train_loader = DataLoader(
         train_data,
-        batch_size=128,  # Kaggle GPU 可以用更大的 batch size
+        batch_size=batch_size,  # Kaggle GPU 可以用更大的 batch size
         shuffle=True,
         num_workers=2,  # Kaggle 上设置为 2
         pin_memory=True  # GPU 训练时启用
     )
     test_loader = DataLoader(
         test_data,
-        batch_size=128,
+        batch_size=batch_size,
         shuffle=False,
         num_workers=2,
         pin_memory=True
@@ -257,22 +281,40 @@ def main():
     # log_interval = 1
     
     # GPU
-    r_list = [16, 64]
+    r_list = [8, 16, 32, 64]
     p_list = [1.0, 0.8, 0.6, 0.4, 0.2]
-    epochs = 5  # 完整训练
-    log_interval = 2  # 每 2 个 epoch 输出一次
+    epochs = 10  # 完整训练
+    log_interval = 1  # 每 5 个 epoch 输出一次
+    
+    # 收集实验配置信息
+    experiment_config = {
+        "model": "vit_tiny_patch16_224",
+        "dataset": "CIFAR-10",
+        "train_size": len(train_data),
+        "test_size": len(test_data),
+        "batch_size": batch_size,
+        "epochs": epochs,
+        "learning_rate": 5e-4,
+        "weight_decay": 0.05,
+        "optimizer": "AdamW",
+        "scheduler": "CosineAnnealingLR",
+        "device": str(device),
+        "num_workers": 2,
+        "image_size": 224,
+        "num_classes": 10
+    }
 
     results = {}
 
     for r in r_list:
         for p in p_list:
-            t, acc, flops = train_one_rp(r, p, train_loader, test_loader, device, 
-                                         epochs=epochs, log_interval=log_interval)
-            results[(r, p)] = (t, acc, flops)
+            t, acc, flops, history = train_one_rp(r, p, train_loader, test_loader, device, 
+                                                   epochs=epochs, log_interval=log_interval)
+            results[(r, p)] = (t, acc, flops, history)
 
     # saving results to JSON
-    json_path = save_results_to_json(r_list, p_list, results)
-    print(f"\n Training complete! Use 'python evaluate.py {json_path}' to visualize results.")
+    json_path, experiment_dir = save_results_to_json(r_list, p_list, results, experiment_config)
+    print(f"\n🎉 Training complete! Use 'python evaluate.py {json_path}' to visualize results.")
 
 if __name__ == "__main__":
     main()
