@@ -14,6 +14,8 @@ from datetime import datetime
 import warnings
 import sys
 import io
+
+# compute FLOPs
 from fvcore.nn import FlopCountAnalysis, flop_count_table
 FVCORE_AVAILABLE = True
 
@@ -225,18 +227,11 @@ def main():
         transform=test_transform
     )
 
-    # CPU
-    # from torch.utils.data import Subset
-    # train_indices = list(range(1000))  # 只用前 1000 张
-    # test_indices = list(range(500))  # 只用前 500 张
-    # train_set_small = Subset(train_set, train_indices)
-    # test_set_small = Subset(test_set, test_indices)
-    # train_data = train_set_small
-    # test_data = test_set_small
-    
-    # GPU
-    train_data = train_set
-    test_data = test_set
+    from torch.utils.data import Subset
+    train_indices = list(range(5000))  # 只用前 5000 张
+    test_indices = list(range(1000))  # 只用前 1000 张
+    train_data = Subset(train_set, train_indices)
+    test_data = Subset(test_set, test_indices)
 
     train_loader = DataLoader(
         train_data,
@@ -262,10 +257,10 @@ def main():
     # log_interval = 1
     
     # GPU
-    r_list = [4, 8, 16, 32, 64]
+    r_list = [16, 64]
     p_list = [1.0, 0.8, 0.6, 0.4, 0.2]
-    epochs = 30  # 完整训练
-    log_interval = 5  # 每 5 个 epoch 输出一次
+    epochs = 5  # 完整训练
+    log_interval = 2  # 每 2 个 epoch 输出一次
 
     results = {}
 
