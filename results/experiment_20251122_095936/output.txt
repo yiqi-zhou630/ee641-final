@@ -1,0 +1,398 @@
+device: cuda
+Train size: 5000 Test size: 1000
+
+============================================================
+Training Config: r=8, p=1.0, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 1.8435 | Train Acc: 0.3300 | Test Acc: 0.4420 | Time: 17.1s
+Epoch [  2/10] | Loss: 0.8666 | Train Acc: 0.6958 | Test Acc: 0.7690 | Time: 33.1s
+Epoch [  3/10] | Loss: 0.4612 | Train Acc: 0.8412 | Test Acc: 0.8100 | Time: 49.7s
+Epoch [  4/10] | Loss: 0.2589 | Train Acc: 0.9132 | Test Acc: 0.8170 | Time: 66.9s
+Epoch [  5/10] | Loss: 0.1551 | Train Acc: 0.9452 | Test Acc: 0.8660 | Time: 84.6s
+Epoch [  6/10] | Loss: 0.0791 | Train Acc: 0.9726 | Test Acc: 0.8790 | Time: 103.0s
+Epoch [  7/10] | Loss: 0.0446 | Train Acc: 0.9864 | Test Acc: 0.8900 | Time: 122.7s
+Epoch [  8/10] | Loss: 0.0207 | Train Acc: 0.9940 | Test Acc: 0.8980 | Time: 143.7s
+Epoch [  9/10] | Loss: 0.0105 | Train Acc: 0.9984 | Test Acc: 0.9020 | Time: 163.6s
+Epoch [ 10/10] | Loss: 0.0083 | Train Acc: 0.9978 | Test Acc: 0.9110 | Time: 183.0s
+------------------------------------------------------------
+Finished: r=8, p=1.0 | Time: 183.01s | Accuracy: 0.9110 | FLOPs: 0.9323 GFLOPs
+
+============================================================
+Training Config: r=8, p=0.8, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 1.7702 | Train Acc: 0.3646 | Test Acc: 0.4760 | Time: 19.4s
+Epoch [  2/10] | Loss: 0.8673 | Train Acc: 0.6916 | Test Acc: 0.6420 | Time: 39.4s
+Epoch [  3/10] | Loss: 0.5831 | Train Acc: 0.8090 | Test Acc: 0.7940 | Time: 59.5s
+Epoch [  4/10] | Loss: 0.3563 | Train Acc: 0.8754 | Test Acc: 0.8400 | Time: 79.1s
+Epoch [  5/10] | Loss: 0.2436 | Train Acc: 0.9182 | Test Acc: 0.8440 | Time: 98.7s
+Epoch [  6/10] | Loss: 0.1222 | Train Acc: 0.9576 | Test Acc: 0.8880 | Time: 118.4s
+Epoch [  7/10] | Loss: 0.0737 | Train Acc: 0.9820 | Test Acc: 0.8820 | Time: 138.0s
+Epoch [  8/10] | Loss: 0.0424 | Train Acc: 0.9868 | Test Acc: 0.9040 | Time: 157.8s
+Epoch [  9/10] | Loss: 0.0187 | Train Acc: 0.9960 | Test Acc: 0.9090 | Time: 177.5s
+Epoch [ 10/10] | Loss: 0.0124 | Train Acc: 0.9986 | Test Acc: 0.9000 | Time: 197.4s
+------------------------------------------------------------
+Finished: r=8, p=0.8 | Time: 197.36s | Accuracy: 0.9070 | FLOPs: 0.9306 GFLOPs
+
+============================================================
+Training Config: r=8, p=0.6, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.2948 | Train Acc: 0.1666 | Test Acc: 0.1950 | Time: 19.6s
+Epoch [  2/10] | Loss: 1.8620 | Train Acc: 0.2848 | Test Acc: 0.3440 | Time: 39.3s
+Epoch [  3/10] | Loss: 1.5454 | Train Acc: 0.4284 | Test Acc: 0.4200 | Time: 59.0s
+Epoch [  4/10] | Loss: 1.2109 | Train Acc: 0.5516 | Test Acc: 0.5320 | Time: 78.6s
+Epoch [  5/10] | Loss: 0.8979 | Train Acc: 0.6782 | Test Acc: 0.6700 | Time: 98.1s
+Epoch [  6/10] | Loss: 0.6622 | Train Acc: 0.7602 | Test Acc: 0.7020 | Time: 117.8s
+Epoch [  7/10] | Loss: 0.4453 | Train Acc: 0.8448 | Test Acc: 0.7650 | Time: 137.4s
+Epoch [  8/10] | Loss: 0.3392 | Train Acc: 0.8858 | Test Acc: 0.7800 | Time: 157.1s
+Epoch [  9/10] | Loss: 0.2332 | Train Acc: 0.9224 | Test Acc: 0.8050 | Time: 176.8s
+Epoch [ 10/10] | Loss: 0.1795 | Train Acc: 0.9450 | Test Acc: 0.8140 | Time: 196.3s
+------------------------------------------------------------
+Finished: r=8, p=0.6 | Time: 196.34s | Accuracy: 0.8100 | FLOPs: 0.9293 GFLOPs
+
+============================================================
+Training Config: r=8, p=0.4, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 1.9193 | Train Acc: 0.2936 | Test Acc: 0.3400 | Time: 19.4s
+Epoch [  2/10] | Loss: 1.0605 | Train Acc: 0.6122 | Test Acc: 0.7410 | Time: 38.9s
+Epoch [  3/10] | Loss: 0.4918 | Train Acc: 0.8326 | Test Acc: 0.8270 | Time: 58.6s
+Epoch [  4/10] | Loss: 0.3183 | Train Acc: 0.8954 | Test Acc: 0.7560 | Time: 78.2s
+Epoch [  5/10] | Loss: 0.3040 | Train Acc: 0.8930 | Test Acc: 0.8470 | Time: 97.7s
+Epoch [  6/10] | Loss: 0.1611 | Train Acc: 0.9492 | Test Acc: 0.8840 | Time: 117.1s
+Epoch [  7/10] | Loss: 0.0925 | Train Acc: 0.9688 | Test Acc: 0.8900 | Time: 136.7s
+Epoch [  8/10] | Loss: 0.0354 | Train Acc: 0.9896 | Test Acc: 0.9070 | Time: 156.3s
+Epoch [  9/10] | Loss: 0.0187 | Train Acc: 0.9952 | Test Acc: 0.9090 | Time: 175.9s
+Epoch [ 10/10] | Loss: 0.0133 | Train Acc: 0.9972 | Test Acc: 0.9120 | Time: 195.6s
+------------------------------------------------------------
+Finished: r=8, p=0.4 | Time: 195.58s | Accuracy: 0.9120 | FLOPs: 0.9284 GFLOPs
+
+============================================================
+Training Config: r=8, p=0.2, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.3334 | Train Acc: 0.1630 | Test Acc: 0.1550 | Time: 19.5s
+Epoch [  2/10] | Loss: 2.1050 | Train Acc: 0.2192 | Test Acc: 0.2630 | Time: 38.9s
+Epoch [  3/10] | Loss: 1.8469 | Train Acc: 0.3106 | Test Acc: 0.2740 | Time: 58.3s
+Epoch [  4/10] | Loss: 1.6174 | Train Acc: 0.3916 | Test Acc: 0.4110 | Time: 77.7s
+Epoch [  5/10] | Loss: 1.3517 | Train Acc: 0.4906 | Test Acc: 0.5030 | Time: 97.1s
+Epoch [  6/10] | Loss: 1.1291 | Train Acc: 0.5936 | Test Acc: 0.5650 | Time: 116.3s
+Epoch [  7/10] | Loss: 0.8933 | Train Acc: 0.6738 | Test Acc: 0.6500 | Time: 135.8s
+Epoch [  8/10] | Loss: 0.6576 | Train Acc: 0.7534 | Test Acc: 0.6920 | Time: 155.3s
+Epoch [  9/10] | Loss: 0.5145 | Train Acc: 0.8158 | Test Acc: 0.7050 | Time: 174.7s
+Epoch [ 10/10] | Loss: 0.4353 | Train Acc: 0.8508 | Test Acc: 0.7360 | Time: 193.9s
+------------------------------------------------------------
+Finished: r=8, p=0.2 | Time: 193.93s | Accuracy: 0.7360 | FLOPs: 0.9279 GFLOPs
+
+============================================================
+Training Config: r=16, p=1.0, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.3578 | Train Acc: 0.1180 | Test Acc: 0.1120 | Time: 14.0s
+Epoch [  2/10] | Loss: 2.2393 | Train Acc: 0.1568 | Test Acc: 0.1930 | Time: 28.1s
+Epoch [  3/10] | Loss: 2.1533 | Train Acc: 0.1974 | Test Acc: 0.2500 | Time: 42.4s
+Epoch [  4/10] | Loss: 2.0393 | Train Acc: 0.2326 | Test Acc: 0.2720 | Time: 56.5s
+Epoch [  5/10] | Loss: 1.9197 | Train Acc: 0.2696 | Test Acc: 0.3020 | Time: 70.8s
+Epoch [  6/10] | Loss: 1.8164 | Train Acc: 0.3128 | Test Acc: 0.3280 | Time: 84.8s
+Epoch [  7/10] | Loss: 1.7048 | Train Acc: 0.3514 | Test Acc: 0.3080 | Time: 99.0s
+Epoch [  8/10] | Loss: 1.6401 | Train Acc: 0.3940 | Test Acc: 0.3920 | Time: 113.0s
+Epoch [  9/10] | Loss: 1.5219 | Train Acc: 0.4306 | Test Acc: 0.4160 | Time: 127.0s
+Epoch [ 10/10] | Loss: 1.4734 | Train Acc: 0.4558 | Test Acc: 0.4250 | Time: 141.3s
+------------------------------------------------------------
+Finished: r=16, p=1.0 | Time: 141.28s | Accuracy: 0.4230 | FLOPs: 0.6267 GFLOPs
+
+============================================================
+Training Config: r=16, p=0.8, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 1.3388 | Train Acc: 0.5272 | Test Acc: 0.6920 | Time: 14.1s
+Epoch [  2/10] | Loss: 0.5894 | Train Acc: 0.7968 | Test Acc: 0.7790 | Time: 28.2s
+Epoch [  3/10] | Loss: 0.3812 | Train Acc: 0.8652 | Test Acc: 0.8460 | Time: 42.2s
+Epoch [  4/10] | Loss: 0.1978 | Train Acc: 0.9304 | Test Acc: 0.8360 | Time: 56.5s
+Epoch [  5/10] | Loss: 0.1137 | Train Acc: 0.9600 | Test Acc: 0.8790 | Time: 70.4s
+Epoch [  6/10] | Loss: 0.0941 | Train Acc: 0.9688 | Test Acc: 0.9110 | Time: 84.6s
+Epoch [  7/10] | Loss: 0.0361 | Train Acc: 0.9910 | Test Acc: 0.9010 | Time: 98.8s
+Epoch [  8/10] | Loss: 0.0207 | Train Acc: 0.9950 | Test Acc: 0.9030 | Time: 113.1s
+Epoch [  9/10] | Loss: 0.0122 | Train Acc: 0.9978 | Test Acc: 0.9050 | Time: 127.1s
+Epoch [ 10/10] | Loss: 0.0092 | Train Acc: 0.9984 | Test Acc: 0.9030 | Time: 141.1s
+------------------------------------------------------------
+Finished: r=16, p=0.8 | Time: 141.13s | Accuracy: 0.9060 | FLOPs: 0.6274 GFLOPs
+
+============================================================
+Training Config: r=16, p=0.6, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.0334 | Train Acc: 0.2558 | Test Acc: 0.3790 | Time: 14.0s
+Epoch [  2/10] | Loss: 1.2472 | Train Acc: 0.5376 | Test Acc: 0.6140 | Time: 28.3s
+Epoch [  3/10] | Loss: 0.7612 | Train Acc: 0.7368 | Test Acc: 0.7380 | Time: 42.4s
+Epoch [  4/10] | Loss: 0.5214 | Train Acc: 0.8266 | Test Acc: 0.7560 | Time: 56.7s
+Epoch [  5/10] | Loss: 0.3579 | Train Acc: 0.8702 | Test Acc: 0.8370 | Time: 70.7s
+Epoch [  6/10] | Loss: 0.1709 | Train Acc: 0.9450 | Test Acc: 0.8590 | Time: 84.7s
+Epoch [  7/10] | Loss: 0.0956 | Train Acc: 0.9676 | Test Acc: 0.8710 | Time: 98.9s
+Epoch [  8/10] | Loss: 0.0496 | Train Acc: 0.9848 | Test Acc: 0.8800 | Time: 113.0s
+Epoch [  9/10] | Loss: 0.0294 | Train Acc: 0.9922 | Test Acc: 0.8880 | Time: 127.1s
+Epoch [ 10/10] | Loss: 0.0179 | Train Acc: 0.9966 | Test Acc: 0.8780 | Time: 141.1s
+------------------------------------------------------------
+Finished: r=16, p=0.6 | Time: 141.10s | Accuracy: 0.8890 | FLOPs: 0.6305 GFLOPs
+
+============================================================
+Training Config: r=16, p=0.4, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 1.4290 | Train Acc: 0.4950 | Test Acc: 0.7220 | Time: 14.2s
+Epoch [  2/10] | Loss: 0.6135 | Train Acc: 0.7950 | Test Acc: 0.7440 | Time: 28.5s
+Epoch [  3/10] | Loss: 0.4744 | Train Acc: 0.8372 | Test Acc: 0.8160 | Time: 42.7s
+Epoch [  4/10] | Loss: 0.2744 | Train Acc: 0.9064 | Test Acc: 0.8310 | Time: 56.7s
+Epoch [  5/10] | Loss: 0.2752 | Train Acc: 0.9100 | Test Acc: 0.8550 | Time: 70.9s
+Epoch [  6/10] | Loss: 0.1216 | Train Acc: 0.9560 | Test Acc: 0.8800 | Time: 85.0s
+Epoch [  7/10] | Loss: 0.0558 | Train Acc: 0.9812 | Test Acc: 0.8940 | Time: 99.2s
+Epoch [  8/10] | Loss: 0.0262 | Train Acc: 0.9928 | Test Acc: 0.9060 | Time: 113.4s
+Epoch [  9/10] | Loss: 0.0218 | Train Acc: 0.9934 | Test Acc: 0.9120 | Time: 127.5s
+Epoch [ 10/10] | Loss: 0.0140 | Train Acc: 0.9974 | Test Acc: 0.9090 | Time: 141.6s
+------------------------------------------------------------
+Finished: r=16, p=0.4 | Time: 141.58s | Accuracy: 0.8940 | FLOPs: 0.6416 GFLOPs
+
+============================================================
+Training Config: r=16, p=0.2, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.3333 | Train Acc: 0.1288 | Test Acc: 0.1490 | Time: 15.3s
+Epoch [  2/10] | Loss: 2.2429 | Train Acc: 0.1544 | Test Acc: 0.1660 | Time: 30.6s
+Epoch [  3/10] | Loss: 2.1099 | Train Acc: 0.2078 | Test Acc: 0.1900 | Time: 46.3s
+Epoch [  4/10] | Loss: 2.0445 | Train Acc: 0.2380 | Test Acc: 0.2910 | Time: 61.7s
+Epoch [  5/10] | Loss: 1.8962 | Train Acc: 0.2846 | Test Acc: 0.2830 | Time: 77.3s
+Epoch [  6/10] | Loss: 1.7905 | Train Acc: 0.3230 | Test Acc: 0.2940 | Time: 92.6s
+Epoch [  7/10] | Loss: 1.7240 | Train Acc: 0.3478 | Test Acc: 0.3690 | Time: 108.2s
+Epoch [  8/10] | Loss: 1.5978 | Train Acc: 0.3910 | Test Acc: 0.3960 | Time: 123.6s
+Epoch [  9/10] | Loss: 1.5201 | Train Acc: 0.4248 | Test Acc: 0.4120 | Time: 139.1s
+Epoch [ 10/10] | Loss: 1.4685 | Train Acc: 0.4466 | Test Acc: 0.4310 | Time: 154.7s
+------------------------------------------------------------
+Finished: r=16, p=0.2 | Time: 154.68s | Accuracy: 0.4190 | FLOPs: 0.7163 GFLOPs
+
+============================================================
+Training Config: r=32, p=1.0, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.1774 | Train Acc: 0.2102 | Test Acc: 0.2310 | Time: 9.6s
+Epoch [  2/10] | Loss: 1.7650 | Train Acc: 0.3260 | Test Acc: 0.3470 | Time: 19.3s
+Epoch [  3/10] | Loss: 1.4735 | Train Acc: 0.4390 | Test Acc: 0.3430 | Time: 29.1s
+Epoch [  4/10] | Loss: 1.2843 | Train Acc: 0.5314 | Test Acc: 0.4290 | Time: 38.9s
+Epoch [  5/10] | Loss: 1.0943 | Train Acc: 0.5956 | Test Acc: 0.6150 | Time: 48.5s
+Epoch [  6/10] | Loss: 0.8015 | Train Acc: 0.7172 | Test Acc: 0.6370 | Time: 58.5s
+Epoch [  7/10] | Loss: 0.6159 | Train Acc: 0.7738 | Test Acc: 0.7090 | Time: 68.3s
+Epoch [  8/10] | Loss: 0.4721 | Train Acc: 0.8402 | Test Acc: 0.7250 | Time: 78.1s
+Epoch [  9/10] | Loss: 0.3799 | Train Acc: 0.8658 | Test Acc: 0.7370 | Time: 87.9s
+Epoch [ 10/10] | Loss: 0.3064 | Train Acc: 0.8976 | Test Acc: 0.7610 | Time: 97.5s
+------------------------------------------------------------
+Finished: r=32, p=1.0 | Time: 97.47s | Accuracy: 0.7610 | FLOPs: 0.3408 GFLOPs
+
+============================================================
+Training Config: r=32, p=0.8, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.1598 | Train Acc: 0.2134 | Test Acc: 0.2360 | Time: 9.7s
+Epoch [  2/10] | Loss: 1.8345 | Train Acc: 0.3082 | Test Acc: 0.3570 | Time: 19.4s
+Epoch [  3/10] | Loss: 1.5435 | Train Acc: 0.4148 | Test Acc: 0.3810 | Time: 29.3s
+Epoch [  4/10] | Loss: 1.3175 | Train Acc: 0.5158 | Test Acc: 0.5450 | Time: 39.0s
+Epoch [  5/10] | Loss: 1.0239 | Train Acc: 0.6204 | Test Acc: 0.5190 | Time: 48.8s
+Epoch [  6/10] | Loss: 0.8460 | Train Acc: 0.7008 | Test Acc: 0.6330 | Time: 58.7s
+Epoch [  7/10] | Loss: 0.6399 | Train Acc: 0.7744 | Test Acc: 0.7200 | Time: 69.0s
+Epoch [  8/10] | Loss: 0.4594 | Train Acc: 0.8364 | Test Acc: 0.7460 | Time: 78.9s
+Epoch [  9/10] | Loss: 0.3499 | Train Acc: 0.8790 | Test Acc: 0.7720 | Time: 88.6s
+Epoch [ 10/10] | Loss: 0.3004 | Train Acc: 0.8988 | Test Acc: 0.7590 | Time: 98.3s
+------------------------------------------------------------
+Finished: r=32, p=0.8 | Time: 98.33s | Accuracy: 0.7700 | FLOPs: 0.3485 GFLOPs
+
+============================================================
+Training Config: r=32, p=0.6, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.1562 | Train Acc: 0.2012 | Test Acc: 0.3130 | Time: 9.8s
+Epoch [  2/10] | Loss: 1.6573 | Train Acc: 0.3712 | Test Acc: 0.3870 | Time: 19.5s
+Epoch [  3/10] | Loss: 1.3203 | Train Acc: 0.5052 | Test Acc: 0.4360 | Time: 29.4s
+Epoch [  4/10] | Loss: 1.1782 | Train Acc: 0.5642 | Test Acc: 0.4970 | Time: 39.2s
+Epoch [  5/10] | Loss: 0.9548 | Train Acc: 0.6478 | Test Acc: 0.6600 | Time: 49.4s
+Epoch [  6/10] | Loss: 0.6887 | Train Acc: 0.7574 | Test Acc: 0.6700 | Time: 59.5s
+Epoch [  7/10] | Loss: 0.5629 | Train Acc: 0.7952 | Test Acc: 0.7070 | Time: 69.5s
+Epoch [  8/10] | Loss: 0.4126 | Train Acc: 0.8534 | Test Acc: 0.7460 | Time: 79.6s
+Epoch [  9/10] | Loss: 0.3185 | Train Acc: 0.8886 | Test Acc: 0.7450 | Time: 89.7s
+Epoch [ 10/10] | Loss: 0.2613 | Train Acc: 0.9066 | Test Acc: 0.7670 | Time: 99.7s
+------------------------------------------------------------
+Finished: r=32, p=0.6 | Time: 99.70s | Accuracy: 0.7550 | FLOPs: 0.3612 GFLOPs
+
+============================================================
+Training Config: r=32, p=0.4, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.2205 | Train Acc: 0.1942 | Test Acc: 0.2830 | Time: 10.8s
+Epoch [  2/10] | Loss: 1.7070 | Train Acc: 0.3624 | Test Acc: 0.3350 | Time: 21.8s
+Epoch [  3/10] | Loss: 1.4434 | Train Acc: 0.4578 | Test Acc: 0.4310 | Time: 32.5s
+Epoch [  4/10] | Loss: 1.1688 | Train Acc: 0.5696 | Test Acc: 0.5290 | Time: 43.3s
+Epoch [  5/10] | Loss: 0.8862 | Train Acc: 0.6762 | Test Acc: 0.6560 | Time: 53.9s
+Epoch [  6/10] | Loss: 0.6341 | Train Acc: 0.7694 | Test Acc: 0.7050 | Time: 65.0s
+Epoch [  7/10] | Loss: 0.4640 | Train Acc: 0.8326 | Test Acc: 0.7650 | Time: 75.8s
+Epoch [  8/10] | Loss: 0.3442 | Train Acc: 0.8818 | Test Acc: 0.7680 | Time: 86.6s
+Epoch [  9/10] | Loss: 0.2516 | Train Acc: 0.9108 | Test Acc: 0.7720 | Time: 97.4s
+Epoch [ 10/10] | Loss: 0.2191 | Train Acc: 0.9286 | Test Acc: 0.8040 | Time: 108.3s
+------------------------------------------------------------
+Finished: r=32, p=0.4 | Time: 108.25s | Accuracy: 0.7920 | FLOPs: 0.4091 GFLOPs
+
+============================================================
+Training Config: r=32, p=0.2, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.3738 | Train Acc: 0.1136 | Test Acc: 0.1100 | Time: 13.8s
+Epoch [  2/10] | Loss: 2.2718 | Train Acc: 0.1448 | Test Acc: 0.1840 | Time: 27.5s
+Epoch [  3/10] | Loss: 2.1556 | Train Acc: 0.1904 | Test Acc: 0.2130 | Time: 41.0s
+Epoch [  4/10] | Loss: 2.0326 | Train Acc: 0.2334 | Test Acc: 0.2810 | Time: 54.7s
+Epoch [  5/10] | Loss: 1.9126 | Train Acc: 0.2720 | Test Acc: 0.2880 | Time: 68.3s
+Epoch [  6/10] | Loss: 1.7992 | Train Acc: 0.3102 | Test Acc: 0.3440 | Time: 82.0s
+Epoch [  7/10] | Loss: 1.6948 | Train Acc: 0.3526 | Test Acc: 0.3590 | Time: 95.7s
+Epoch [  8/10] | Loss: 1.6258 | Train Acc: 0.3900 | Test Acc: 0.3480 | Time: 109.4s
+Epoch [  9/10] | Loss: 1.5126 | Train Acc: 0.4324 | Test Acc: 0.4420 | Time: 123.1s
+Epoch [ 10/10] | Loss: 1.4670 | Train Acc: 0.4552 | Test Acc: 0.4190 | Time: 136.6s
+------------------------------------------------------------
+Finished: r=32, p=0.2 | Time: 136.62s | Accuracy: 0.4290 | FLOPs: 0.6011 GFLOPs
+
+============================================================
+Training Config: r=64, p=1.0, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.1903 | Train Acc: 0.2106 | Test Acc: 0.2630 | Time: 9.1s
+Epoch [  2/10] | Loss: 1.7460 | Train Acc: 0.3264 | Test Acc: 0.3900 | Time: 18.9s
+Epoch [  3/10] | Loss: 1.4640 | Train Acc: 0.4354 | Test Acc: 0.3740 | Time: 28.5s
+Epoch [  4/10] | Loss: 1.3014 | Train Acc: 0.5136 | Test Acc: 0.4220 | Time: 38.3s
+Epoch [  5/10] | Loss: 1.1518 | Train Acc: 0.5660 | Test Acc: 0.4920 | Time: 48.1s
+Epoch [  6/10] | Loss: 0.9781 | Train Acc: 0.6398 | Test Acc: 0.6080 | Time: 57.8s
+Epoch [  7/10] | Loss: 0.8431 | Train Acc: 0.7024 | Test Acc: 0.6170 | Time: 67.4s
+Epoch [  8/10] | Loss: 0.7119 | Train Acc: 0.7420 | Test Acc: 0.6530 | Time: 77.1s
+Epoch [  9/10] | Loss: 0.5805 | Train Acc: 0.7880 | Test Acc: 0.6770 | Time: 86.9s
+Epoch [ 10/10] | Loss: 0.5224 | Train Acc: 0.8184 | Test Acc: 0.6950 | Time: 96.6s
+------------------------------------------------------------
+Finished: r=64, p=1.0 | Time: 96.59s | Accuracy: 0.6950 | FLOPs: 0.2067 GFLOPs
+
+============================================================
+Training Config: r=64, p=0.8, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.1642 | Train Acc: 0.2084 | Test Acc: 0.2370 | Time: 9.7s
+Epoch [  2/10] | Loss: 1.7819 | Train Acc: 0.3282 | Test Acc: 0.1730 | Time: 19.1s
+Epoch [  3/10] | Loss: 1.5981 | Train Acc: 0.4046 | Test Acc: 0.4360 | Time: 28.9s
+Epoch [  4/10] | Loss: 1.2488 | Train Acc: 0.5238 | Test Acc: 0.4770 | Time: 38.6s
+Epoch [  5/10] | Loss: 1.1042 | Train Acc: 0.6032 | Test Acc: 0.6030 | Time: 48.4s
+Epoch [  6/10] | Loss: 0.9490 | Train Acc: 0.6622 | Test Acc: 0.5900 | Time: 57.8s
+Epoch [  7/10] | Loss: 0.8534 | Train Acc: 0.6900 | Test Acc: 0.6730 | Time: 67.3s
+Epoch [  8/10] | Loss: 0.6665 | Train Acc: 0.7664 | Test Acc: 0.6720 | Time: 76.9s
+Epoch [  9/10] | Loss: 0.5820 | Train Acc: 0.7916 | Test Acc: 0.7050 | Time: 86.8s
+Epoch [ 10/10] | Loss: 0.5060 | Train Acc: 0.8190 | Test Acc: 0.7140 | Time: 96.8s
+------------------------------------------------------------
+Finished: r=64, p=0.8 | Time: 96.76s | Accuracy: 0.6960 | FLOPs: 0.2226 GFLOPs
+
+============================================================
+Training Config: r=64, p=0.6, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.1359 | Train Acc: 0.2102 | Test Acc: 0.2110 | Time: 10.0s
+Epoch [  2/10] | Loss: 1.8549 | Train Acc: 0.2992 | Test Acc: 0.3000 | Time: 19.1s
+Epoch [  3/10] | Loss: 1.6261 | Train Acc: 0.3910 | Test Acc: 0.3380 | Time: 28.0s
+Epoch [  4/10] | Loss: 1.4177 | Train Acc: 0.4710 | Test Acc: 0.4240 | Time: 36.7s
+Epoch [  5/10] | Loss: 1.2266 | Train Acc: 0.5410 | Test Acc: 0.5190 | Time: 45.6s
+Epoch [  6/10] | Loss: 1.0685 | Train Acc: 0.6008 | Test Acc: 0.5970 | Time: 54.6s
+Epoch [  7/10] | Loss: 0.9192 | Train Acc: 0.6664 | Test Acc: 0.6370 | Time: 63.4s
+Epoch [  8/10] | Loss: 0.7921 | Train Acc: 0.7148 | Test Acc: 0.6520 | Time: 72.3s
+Epoch [  9/10] | Loss: 0.6698 | Train Acc: 0.7596 | Test Acc: 0.6830 | Time: 81.3s
+Epoch [ 10/10] | Loss: 0.6011 | Train Acc: 0.7854 | Test Acc: 0.6910 | Time: 90.3s
+------------------------------------------------------------
+Finished: r=64, p=0.6 | Time: 90.32s | Accuracy: 0.7010 | FLOPs: 0.2518 GFLOPs
+
+============================================================
+Training Config: r=64, p=0.4, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.1714 | Train Acc: 0.2096 | Test Acc: 0.2440 | Time: 9.4s
+Epoch [  2/10] | Loss: 1.6478 | Train Acc: 0.3660 | Test Acc: 0.3610 | Time: 19.3s
+Epoch [  3/10] | Loss: 1.4236 | Train Acc: 0.4720 | Test Acc: 0.4020 | Time: 28.8s
+Epoch [  4/10] | Loss: 1.1475 | Train Acc: 0.5806 | Test Acc: 0.5560 | Time: 38.0s
+Epoch [  5/10] | Loss: 0.9714 | Train Acc: 0.6504 | Test Acc: 0.6370 | Time: 47.4s
+Epoch [  6/10] | Loss: 0.7669 | Train Acc: 0.7296 | Test Acc: 0.7030 | Time: 56.7s
+Epoch [  7/10] | Loss: 0.6374 | Train Acc: 0.7776 | Test Acc: 0.7010 | Time: 66.0s
+Epoch [  8/10] | Loss: 0.4909 | Train Acc: 0.8174 | Test Acc: 0.7150 | Time: 75.3s
+Epoch [  9/10] | Loss: 0.4110 | Train Acc: 0.8528 | Test Acc: 0.7400 | Time: 84.8s
+Epoch [ 10/10] | Loss: 0.3660 | Train Acc: 0.8708 | Test Acc: 0.7550 | Time: 94.3s
+------------------------------------------------------------
+Finished: r=64, p=0.4 | Time: 94.26s | Accuracy: 0.7510 | FLOPs: 0.3182 GFLOPs
+
+============================================================
+Training Config: r=64, p=0.2, epochs=10
+============================================================
+Epoch [  1/10] | Loss: 2.1130 | Train Acc: 0.2262 | Test Acc: 0.3050 | Time: 9.7s
+Epoch [  2/10] | Loss: 1.5252 | Train Acc: 0.4358 | Test Acc: 0.4070 | Time: 19.6s
+Epoch [  3/10] | Loss: 1.1863 | Train Acc: 0.5646 | Test Acc: 0.6310 | Time: 29.3s
+Epoch [  4/10] | Loss: 0.9238 | Train Acc: 0.6642 | Test Acc: 0.6600 | Time: 39.1s
+Epoch [  5/10] | Loss: 0.8234 | Train Acc: 0.6974 | Test Acc: 0.6540 | Time: 48.9s
+Epoch [  6/10] | Loss: 0.7047 | Train Acc: 0.7546 | Test Acc: 0.7170 | Time: 58.5s
+Epoch [  7/10] | Loss: 0.5047 | Train Acc: 0.8246 | Test Acc: 0.7260 | Time: 68.4s
+Epoch [  8/10] | Loss: 0.4235 | Train Acc: 0.8494 | Test Acc: 0.7610 | Time: 78.4s
+Epoch [  9/10] | Loss: 0.3219 | Train Acc: 0.8830 | Test Acc: 0.7610 | Time: 88.3s
+Epoch [ 10/10] | Loss: 0.2687 | Train Acc: 0.9060 | Test Acc: 0.7930 | Time: 98.2s
+------------------------------------------------------------
+Finished: r=64, p=0.2 | Time: 98.22s | Accuracy: 0.7700 | FLOPs: 0.3395 GFLOPs
+
+✓ Results saved to: results/experiment_20251122_095936/
+  - JSON file: results/experiment_20251122_095936/results.json
+
+🎉 Training complete! Use 'python evaluate.py results/experiment_20251122_095936/results.json' to visualize results.
+
+
+
+
+
+
+
+
+Loading results from: results/experiment_20251122_095936/results.json
+
+================================================================================
+EXPERIMENT SUMMARY
+================================================================================
+Timestamp: 20251122_095936
+
+--- Experiment Configuration ---
+Model:        vit_tiny_patch16_224
+Dataset:      CIFAR-10
+Train Size:   5000
+Test Size:    1000
+Batch Size:   128
+Epochs:       10
+Learning Rate: 0.0005
+Optimizer:    AdamW
+Device:       cuda
+Image Size:   224
+
+--- ToMe Parameters ---
+r values tested: [8, 16, 32, 64]
+p values tested: [1.0, 0.8, 0.6, 0.4, 0.2]
+
+--- Results ---
+--------------------------------------------------------------------------------
+Config          Train Time (s)     Accuracy     FLOPs (G)   
+--------------------------------------------------------------------------------
+r16_p0.2        154.68             0.4190       0.7163      
+r16_p0.4        141.58             0.8940       0.6416      
+r16_p0.6        141.10             0.8890       0.6305      
+r16_p0.8        141.13             0.9060       0.6274      
+r16_p1.0        141.28             0.4230       0.6267      
+r32_p0.2        136.62             0.4290       0.6011      
+r32_p0.4        108.25             0.7920       0.4091      
+r32_p0.6        99.70              0.7550       0.3612      
+r32_p0.8        98.33              0.7700       0.3485      
+r32_p1.0        97.47              0.7610       0.3408      
+r64_p0.2        98.22              0.7700       0.3395      
+r64_p0.4        94.26              0.7510       0.3182      
+r64_p0.6        90.32              0.7010       0.2518      
+r64_p0.8        96.76              0.6960       0.2226      
+r64_p1.0        96.59              0.6950       0.2067      
+r8_p0.2         193.93             0.7360       0.9279      
+r8_p0.4         195.58             0.9120       0.9284      
+r8_p0.6         196.34             0.8100       0.9293      
+r8_p0.8         197.36             0.9070       0.9306      
+r8_p1.0         183.01             0.9110       0.9323      
+================================================================================
+
+
+Generating visualizations...
+✓ Saved: train_time_heatmap.png
+✓ Saved: accuracy_heatmap.png
+✓ Saved: train_time_vs_r.png
+✓ Saved: accuracy_vs_r.png
+
+ Generating training curves...
+✓ Saved training curves for all configurations
+
+✓ All plots saved to results/experiment_20251122_095936/ folder
+
+✓ Evaluation complete!
+  All files saved to: results/experiment_20251122_095936/

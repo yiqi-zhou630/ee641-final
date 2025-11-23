@@ -134,39 +134,67 @@ def visualize_results(data, json_path):
     if has_history:
         print("\n Generating training curves...")
         
-        # 为每个 (r, p) 配置绘制训练曲线
+        # 方案1: 固定 r，不同 p 的曲线画在一起
+        # 按 r 值分组
+        r_groups = {}
         for key, value in results_dict.items():
             if 'history' not in value or not value['history']:
                 continue
-                
-            history = value['history']
-            epochs = history['epochs']
+            
+            # 解析 r 和 p
+            parts = key.split('_')
+            r = int(parts[0][1:])
+            p = float(parts[1][1:])
+            
+            if r not in r_groups:
+                r_groups[r] = []
+            r_groups[r].append((p, value['history']))
+        
+        # 为每个 r 值生成一张图
+        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']
+        
+        for r in sorted(r_groups.keys()):
+            configs = sorted(r_groups[r], key=lambda x: x[0], reverse=True)  # 按 p 降序
             
             # 创建 2x1 子图
-            fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
+            fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+            fig.suptitle(f'Training Curves for r={r} (Different p Values)', 
+                        fontsize=14, fontweight='bold')
             
             # 子图1: Loss 曲线
-            ax1.plot(epochs, history['train_loss'], 'b-', linewidth=2, label='Train Loss')
-            ax1.set_xlabel('Epoch')
-            ax1.set_ylabel('Loss')
-            ax1.set_title(f'Training Loss - {key}')
-            ax1.legend()
+            for idx, (p, history) in enumerate(configs):
+                epochs = history['epochs']
+                color = colors[idx % len(colors)]
+                ax1.plot(epochs, history['train_loss'], 
+                        color=color, linestyle='-', linewidth=2, 
+                        marker='o', markersize=4, label=f'p={p}')
+            
+            ax1.set_xlabel('Epoch', fontsize=11)
+            ax1.set_ylabel('Training Loss', fontsize=11)
+            ax1.set_title('Training Loss', fontsize=12, fontweight='bold')
+            ax1.legend(loc='best', fontsize=10)
             ax1.grid(True, alpha=0.3)
             
-            # 子图2: Accuracy 曲线
-            ax2.plot(epochs, history['train_acc'], 'g-', linewidth=2, label='Train Acc')
-            ax2.plot(epochs, history['test_acc'], 'r-', linewidth=2, label='Test Acc')
-            ax2.set_xlabel('Epoch')
-            ax2.set_ylabel('Accuracy')
-            ax2.set_title(f'Training & Test Accuracy - {key}')
-            ax2.legend()
+            # 子图2: Test Accuracy 曲线
+            for idx, (p, history) in enumerate(configs):
+                epochs = history['epochs']
+                color = colors[idx % len(colors)]
+                ax2.plot(epochs, history['test_acc'], 
+                        color=color, linestyle='-', linewidth=2, 
+                        marker='s', markersize=4, label=f'p={p}')
+            
+            ax2.set_xlabel('Epoch', fontsize=11)
+            ax2.set_ylabel('Test Accuracy', fontsize=11)
+            ax2.set_title('Test Accuracy', fontsize=12, fontweight='bold')
+            ax2.legend(loc='best', fontsize=10)
             ax2.grid(True, alpha=0.3)
             
             plt.tight_layout()
-            plt.savefig(f"{output_dir}/training_curve_{key}.png", dpi=150)
+            plt.savefig(f"{output_dir}/training_curves_r{r}.png", dpi=150)
             plt.close()
+            print(f"✓ Saved: training_curves_r{r}.png (grouped by p)")
         
-        print(f"✓ Saved training curves for all configurations")
+        print(f"✓ Saved {len(r_groups)} combined training curve plots")
 
     print(f"\n✓ All plots saved to {output_dir}/ folder")
 

@@ -281,10 +281,10 @@ def main():
     # log_interval = 1
     
     # GPU
-    r_list = [8, 16, 32, 64]
-    p_list = [1.0, 0.8, 0.6, 0.4, 0.2]
+    r_list = [2, 6, 10, 14]
+    p_list = [1.0, 0.9, 0.8, 0.65, 0.5, 0.35]
     epochs = 10  # 完整训练
-    log_interval = 1  # 每 5 个 epoch 输出一次
+    log_interval = 1  # 每个 epoch 都输出一次
     
     # 收集实验配置信息
     experiment_config = {
